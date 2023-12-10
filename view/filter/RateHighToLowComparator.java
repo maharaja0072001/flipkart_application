@@ -1,12 +1,28 @@
 package com.flipkart.view.filter;
 
-import com.flipkart.product.ProductImpl;
+import com.flipkart.product.Product;
+
 import java.util.Comparator;
 
-public class RateHighToLowComparator implements Comparator<ProductImpl> {
+/**
+ * <p>
+ * Responsible for comparing the product from price high to low
+ * </p>
+ *
+ * @author Maharaja S
+ * @version 1.0
+ */
+public class RateHighToLowComparator implements Comparator<Product> {
 
+    /**
+     * <p>
+     * Compares two product based on their price and return the subtracted value
+     * </p>
+     *
+     * @return the value got by subtracting the price of two products.
+     */
     @Override
-    public int compare(final ProductImpl o1, final ProductImpl o2) {
-        return o2.getPrice() - o1.getPrice();
+    public int compare(final Product product1, final Product product2) {
+        return (int) (product2.getPrice() - product1.getPrice());
     }
 }

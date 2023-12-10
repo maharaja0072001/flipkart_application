@@ -4,7 +4,7 @@ import com.flipkart.product.mobile.Mobile;
 
 public class OppoMobile extends Mobile {
 
-    public OppoMobile(final String model, final int price) {
+    public OppoMobile(final String model, final float price) {
         super("Oppo", model, price);
     }
 }

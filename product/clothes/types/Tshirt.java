@@ -4,9 +4,7 @@ import com.flipkart.product.clothes.Clothes;
 
 public class Tshirt extends Clothes {
 
-    public Tshirt(final String gender, final String size, final int price, final String brand) {
+    public Tshirt(final String gender, final String size, final float price, final String brand) {
         super("Tshirt", gender, size, price, brand);
     }
-
-
 }

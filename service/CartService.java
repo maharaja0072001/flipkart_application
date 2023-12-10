@@ -1,13 +1,23 @@
 package com.flipkart.service;
 
-import com.flipkart.product.ProductImpl;
-import java.util.List;
+import com.flipkart.model.Cart;
+import com.flipkart.model.User;
+import com.flipkart.product.Product;
 
+/**
+ * <p>
+ * Provides service for the Cart.
+ * </p>
+ *
+ * @author Maharaja S
+ * @version 1.0
+ */
 public interface CartService {
 
-    void addItemToCart(final ProductImpl item);
-    void removeItemFromCart(final ProductImpl item);
-    List<ProductImpl> getUserCart();
-    int getTotalAmountInCart();
+    Cart getUserCart(final int userId);
+
+    boolean addItemToCart(final Product product, final User user);
+
+    void removeItemFromCart(final Product product, final User user);
 
 }

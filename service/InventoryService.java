@@ -1,15 +1,22 @@
 package com.flipkart.service;
 
-import com.flipkart.product.ProductImpl;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import com.flipkart.product.Product;
 
+import java.util.List;
+
+/**
+ * <p>
+ * Provides service for the Inventory.
+ * </p>
+ *
+ * @author Maharaja S
+ * @version 1.0
+ */
 public interface InventoryService {
 
-    void addItemsToInventory(final ProductImpl item);
-    void addItemsToInventory(final List<ProductImpl> items);
-    void removeItemFromInventory(final ProductImpl item);
-    void removeItemFromInventory(final List <ProductImpl> items);
-    Map<String, ArrayList<ProductImpl>> getInventoryItems();
+    void addItemToInventory(final List<Product> products);
+    void removeItemFromInventory(final Product product);
+    List<Product> getMobileItems();
+    List<Product> getLaptopItems();
+    List<Product> getClothesItems();
 }

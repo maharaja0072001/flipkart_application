@@ -2,74 +2,103 @@ package com.flipkart.view;
 
 import com.flipkart.InputHandler;
 import com.flipkart.model.User;
-import com.flipkart.product.ProductImpl;
-import com.flipkart.service.InventoryService;
-import com.flipkart.service.service_impl.InventoryServiceImpl;
+import com.flipkart.product.Product;
+import com.flipkart.view.datavalidation.UserDataValidator;
 import com.flipkart.view.filter.PriceFilter;
 import com.flipkart.view.filter.RateHighToLowFilter;
 import com.flipkart.view.filter.RateLowToHighFilter;
+
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * <p>
+ * Responsible for showing the filter menu which is useful to get filtered items.
+ * </p>
+ *
+ * @author Maharaja S
+ * @version 1.0
+ */
 public class FilterMenuView {
 
     private static final Scanner SCANNER = InputHandler.getScanner();
     private static final CartView CART_VIEW = CartView.getInstance();
     private static final WishlistView WISHLIST_VIEW = WishlistView.getInstance();
-    private static final InventoryService INVENTORY = InventoryServiceImpl.getInstance();
+    private static final UserDataValidator USER_DATA_VALIDATOR = UserDataValidator.getInstance();
     private static FilterMenuView filterMenuViewInstance;
 
+    /**
+     * <p>
+     *     Default constructor of FilterMenuView class. Kept private to restrict from
+     *     creating object outside this class.
+     * </p>
+     */
     private FilterMenuView() {}
 
-    public static synchronized FilterMenuView getFilterMenuViewInstance() {
-        if (filterMenuViewInstance == null) {
+    /**
+     * <p>
+     * Creates a single object of FilterMenuView class and returns it.
+     * </p>
+     *
+     * @return the single instance of FilterMenuView class.
+     */
+    public static synchronized FilterMenuView getInstance() {
+        if (null == filterMenuViewInstance) {
             filterMenuViewInstance = new FilterMenuView();
         }
+
         return filterMenuViewInstance;
     }
 
-    public void showFilter(final User user, final String productType) {
+    /**
+     * <p>
+     *     Shows the filter options to the user to filter the items presented in the inventory.
+     * </p>
+     */
+    public void showFilterMenu(final User user, final List<Product> inventoryItems) {
         boolean exit = false;
         int input;
+        Product selectedItem;
 
         outerLoop:
         while (!exit) {
             try {
-                ProductImpl selectedItem;
-
                 System.out.println("Filter By:\n1.Rate Low to High\n2.Rate High to Low\n3.Price\n4.Back");
                 input = Integer.parseInt(SCANNER.nextLine().trim());
 
                 switch (input) {
                     case 1:
-                        final List<ProductImpl> itemsFilteredByLowToHigh = RateLowToHighFilter.getInstance().getFilteredItems(INVENTORY.getInventoryItems(), productType);
+                        final List<Product> itemsFilteredByLowToHigh = RateLowToHighFilter.getInstance().getFilteredItems(inventoryItems);
+                        showItems(itemsFilteredByLowToHigh);
 
                         while (true) {
                             selectedItem = getSelectedItem(itemsFilteredByLowToHigh);
 
-                            if (selectedItem == null) {
+                            if (null == selectedItem) {
                                continue outerLoop;
                             }
-                            this.addItemToCartOrWishlist(selectedItem, user);
+                            addItemToCartOrWishlist(selectedItem, user);
                         }
                     case 2:
-                        final List<ProductImpl> itemsFilteredByHighToLow = RateHighToLowFilter.getInstance().getFilteredItems(INVENTORY.getInventoryItems(), productType);
+                        final List<Product> itemsFilteredByHighToLow = RateHighToLowFilter.getInstance().getFilteredItems(inventoryItems);
+                        showItems(itemsFilteredByHighToLow);
 
                         while (true) {
                             selectedItem = getSelectedItem(itemsFilteredByHighToLow);
 
-                            if (selectedItem == null) {
+                            if (null == selectedItem) {
                                 continue outerLoop;
                             }
-                            this.addItemToCartOrWishlist(selectedItem, user);
+                            addItemToCartOrWishlist(selectedItem, user);
                         }
                     case 3:
-                        final List<ProductImpl> itemsFilteredByPrice = PriceFilter.getInstance().getFilteredItems(INVENTORY.getInventoryItems(), productType);
+                        final List<Product> itemsFilteredByPrice = PriceFilter.getInstance().getFilteredItems(inventoryItems);
+                        showItems(itemsFilteredByPrice);
 
                         while (true) {
                             selectedItem = getSelectedItem(itemsFilteredByPrice);
 
-                            if (selectedItem == null) {
+                            if (null == selectedItem) {
                                 continue outerLoop;
                             }
                             this.addItemToCartOrWishlist(selectedItem, user);
@@ -78,7 +107,7 @@ public class FilterMenuView {
                         exit = true;
                         break;
                     default:
-                        System.out.println("Enter a valid choice! ");
+                        System.out.println("Enter a valid choice ");
                         break;
                 }
             } catch (NumberFormatException e) {
@@ -87,44 +116,68 @@ public class FilterMenuView {
         }
     }
 
-    private void addItemToCartOrWishlist(final ProductImpl item, final User user) {
-        System.out.println("Enter '1' to add to cart or '2' to add to wishlist");
-        final int choice = Integer.parseInt(SCANNER.nextLine().trim());
+    /**
+     * <p>
+     *     Gets the choice from the user to add the item to the cart or wishlist.
+     * </p>
+     */
+    public void addItemToCartOrWishlist(final Product item, final User user) {
+        int choice;
+
+        System.out.println("Enter '1' to add to cart or '2' to add to wishlist. Press any key to go back");
+        try {
+            choice = Integer.parseInt(SCANNER.nextLine().trim());
+        } catch (NumberFormatException exception) {
+            return;
+        }
 
         switch (choice) {
             case 1:
-                CART_VIEW.addToCart(item, user);
+                if (CART_VIEW.addToCart(item, user)) {
+                    System.out.println("Item added to cart");
+                } else {
+                    System.out.println("Item not added");
+                };
                 break;
             case 2:
-                WISHLIST_VIEW.addItemToWishlist(item, user);
+                if (WISHLIST_VIEW.addToWishlist(item, user)) {
+                    System.out.println("Item added to wishlist");
+                } else {
+                    System.out.println("Item not added");
+                };
                 break;
             default:
-                System.out.println("Enter a valid choice !");
                 break;
         }
     }
 
-    private ProductImpl getSelectedItem(final List<ProductImpl> items) {
+    /**
+     * <p>
+     *     Gets the specific item from the inventory which was selected by the user and return it.
+     *
+     * @return the item selected by the user.
+     * </p>
+     */
+    public Product getSelectedItem(final List<Product> items) {
         int index;
         final Scanner scanner = InputHandler.getScanner();
 
-        if (items == null || items.isEmpty()) {
+        if (null == items || items.isEmpty()) {
             return null;
         }
-        this.showItems(items);
 
         while (true) {
             try {
-                System.out.println("Enter the index : [Press '%' to go back]");
+                System.out.println("Enter the product id : [Press '$' to go back]");
                 String input = scanner.nextLine().trim();
 
-                if (input.equals("%")) {
+                if (USER_DATA_VALIDATOR.containsToNavigateBack(input)) {
                     return null;
                 } else {
                     index = Integer.parseInt(input);
 
-                    if (index >= items.size()) {
-                        System.out.println("Enter a valid index");
+                    if (index > items.size() || index <= 0) {
+                        System.out.println("Enter a valid product id");
                         continue;
                     }
                     break;
@@ -133,12 +186,18 @@ public class FilterMenuView {
                 System.out.println("Invalid input. Enter a number.");
             }
         }
-        return items.get(index);
+
+        return items.get(--index);
     }
 
-    private void showItems(final List<ProductImpl> items) {
+    /**
+     * <p>
+     *     Shows the list of items to the user.
+     * </p>
+     */
+    public void showItems(final List<Product> items) {
         for (int i = 0; i < items.size(); i++) {
-            System.out.println(String.format("[%d : %s]", i, items.get(i)));
+            System.out.println(String.format("[%d : %s]", i+1, items.get(i)));
         }
     }
 }

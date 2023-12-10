@@ -4,7 +4,7 @@ import com.flipkart.product.mobile.Mobile;
 
 public class RealmeMobile extends Mobile {
 
-    public RealmeMobile(final String model, final int price) {
+    public RealmeMobile(final String model, final float price) {
         super("Realme", model, price);
     }
 }

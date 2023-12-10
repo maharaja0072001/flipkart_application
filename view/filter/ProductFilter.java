@@ -1,11 +1,25 @@
 package com.flipkart.view.filter;
 
-import com.flipkart.product.ProductImpl;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import com.flipkart.product.Product;
 
+import java.util.List;
+
+/**
+ * <p>
+ * Provides a contract for the classes implementing it for filtering the products.
+ * </p>
+ *
+ * @author Maharaja S
+ * @version 1.0
+ */
 public interface ProductFilter {
 
-    List<ProductImpl> getFilteredItems(Map<String, ArrayList<ProductImpl>> inventory, String productType);
+    /**
+     * <p>
+     *    filters the inventory based on implementation and returns the filtered items.
+     * </p>
+     *
+     * @return the filtered items.
+     */
+    List<Product> getFilteredItems(final List<Product> inventoryItems);
 }

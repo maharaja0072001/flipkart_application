@@ -3,155 +3,301 @@ package com.flipkart.view;
 import com.flipkart.controller.UserController;
 import com.flipkart.model.User;
 import com.flipkart.InputHandler;
-import com.flipkart.view.datavalidator.UserDataValidator;
-import java.util.Scanner;
-import java.util.regex.Pattern;
+import com.flipkart.view.datavalidation.UserDataValidator;
 
+import java.util.Scanner;
+
+/**
+ * Responsible for creating, validating the users and updating and printing the user details.
+ *
+ * @author Maharaja S
+ * @version 1.0
+ */
 public class UserView {
 
     private static final Scanner SCANNER = InputHandler.getScanner();
     private static final UserController USER_CONTROLLER = UserController.getInstance();
-    private static final HomePageView HOME_PAGE_VIEW = HomePageView.getHomePageViewInstance();
-    private static final AuthenticationView AUTHENTICATION_VIEW = AuthenticationView.getAuthenticationViewInstance();
-    private static final UserDataValidator USER_DATA_VALIDATOR = UserDataValidator.getUserDataValidatorInstance();
+    private static final HomePageView HOME_PAGE_VIEW = HomePageView.getInstance();
+    private static final AuthenticationView AUTHENTICATION_VIEW = AuthenticationView.getInstance();
+    private static final UserDataValidator USER_DATA_VALIDATOR = UserDataValidator.getInstance();
     private static UserView userViewInstance;
 
+    /**
+     * Default constructor for UserView class.Kept private to restrict from
+     * creating object outside this class.
+     */
     private UserView() {}
 
+    /**
+     * Creates a single object of UserView class and returns it.
+     *
+     * @return the single instance of UserView class.
+     */
     public static synchronized UserView getInstance() {
-        if (userViewInstance == null) {
+        if (null == userViewInstance) {
             userViewInstance = new UserView();
         }
+
         return userViewInstance;
     }
 
+    /**
+     * Creates a new user by getting details from the user
+     *
+     * @return true if user created successfully or false otherwise. //
+     */
     public void createNewUser() {
         final User user = new User();
 
-        this.setUserDetails(user);
+        System.out.println("Enter your details to create new user or press '$' to go back");
+        final String name = getName();
+
+        if (USER_DATA_VALIDATOR.isNull(name)) {
+           return;
+        } else {
+            user.setName(name);
+        }
+        final String mobileNumber = getMobileNumber();
+
+        if (USER_DATA_VALIDATOR.isNull(mobileNumber)) {
+            return;
+        } else {
+            user.setMobileNumber(mobileNumber);
+        }
+        final String emailId = getEmailId();
+
+        if (USER_DATA_VALIDATOR.isNull(emailId)) {
+            return;
+        } else {
+            user.setEmailId(emailId);
+        }
+        final String password = getPassword();
+
+        if (USER_DATA_VALIDATOR.isNull(password)) {
+            return;
+        } else {
+            user.setPassword(password);
+        }
 
         if (USER_CONTROLLER.createUser(user)) {
-            System.out.println("User created successfully!!");
+            System.out.println("User created successfully");
+            HOME_PAGE_VIEW.showHomePage(user);
         } else {
-            System.out.println("User already exists. Please login !!");
-            this.authenticateUser();
+            System.out.println("User already exists. Please login");
+            validateUser();
         }
-    }
+    }              
 
-    private void setUserDetails(final User user) {
-        user.setName(this.getName());
-        user.setMobileNumber(this.getMobileNumber());
-        user.setEmailId(this.getEmailId());
-        user.setPassword(this.getPassword());
-    }
+    /**
+     * Authenticates the existing user by the details given by the user.
+     *
+     * @return true if the entered details of existing user are correct or false otherwise.
+     */
+    public void validateUser() {
+        System.out.println("Enter the credentials to login. Press '$' to go back");
+        final String mobileNumber = getMobileNumber();
 
-    public void authenticateUser() {
-        final String mobileNumber = this.getMobileNumber();
-
-        System.out.println("Enter the Password : [Enter '%' to go back]");
+        if (USER_DATA_VALIDATOR.isNull(mobileNumber)) {
+          return;
+        }
+        System.out.println("Enter the Password :");
         final String password = SCANNER.nextLine();
 
-        if (password.equals("%")) {
-            AUTHENTICATION_VIEW.authenticateUser();
+        if (USER_DATA_VALIDATOR.containsToNavigateBack(password)) {
+            return;
         }
-        final User user = this.getUser(mobileNumber, password);
+        final User user = USER_CONTROLLER.getExistingUser(mobileNumber, password);
 
-        if (user != null) {
+        if (null != user) {
             System.out.println("Login successful");
             HOME_PAGE_VIEW.showHomePage(user);
+        } else {
+            System.out.println("Wrong credentials or user doesn't exist");
         }
     }
 
-    private User getUser(final String mobileNumber, final String password) {
-        final User user = USER_CONTROLLER.getUser(mobileNumber);
+    /**
+     * shows the profile of the user and updates the details chosen by the user.
+     *
+     * @param user  current user to view the profile and edit the details
+     */
+    public void viewAndEditProfile(final User user) {
 
-        if (user == null) {
-            System.out.println("User not found");
+        System.out.println(String.format("User profile:\nName : %s\nEmail Id : %s\nMobile : +%s\nEnter '1' to edit details or press $ to go back",
+                user.getName(), user.getEmailId(), user.getMobileNumber()));
+        final String choice = SCANNER.nextLine().trim();
+
+        if (USER_DATA_VALIDATOR.validateAccess(choice)) {
+            updateUserDetails(user);
+        } else if (USER_DATA_VALIDATOR.containsToNavigateBack(choice)) {
+        } else {
+            viewAndEditProfile(user);
+        }
+    }
+
+    /**
+     * Updates the selected user details chosen by the user.
+     *
+     * @param user current user to update the details
+     */
+    private void updateUserDetails(final User user) {
+        System.out.println("Do you want to edit name press '1'.");
+
+        if (USER_DATA_VALIDATOR.validateAccess(SCANNER.nextLine().trim())) {
+            final String name = getName();
+
+            if (!USER_DATA_VALIDATOR.isNull(name)) {
+                user.setName(name);
+                System.out.println("Name is updated");
+            }
+        } else {
+            return;
+        }
+        System.out.println("Do you want to edit email id press '1'.");
+
+        if (USER_DATA_VALIDATOR.validateAccess(SCANNER.nextLine().trim())) {
+            final String emailId = getEmailId();
+
+            if (!USER_DATA_VALIDATOR.isNull(emailId)) {
+                user.setEmailId(emailId);
+                System.out.println("Email id is updated");
+            }
+        } else {
+            return;
+        }
+        System.out.println("Do you want to edit mobile number press '1'.");
+
+        if (USER_DATA_VALIDATOR.validateAccess(SCANNER.nextLine().trim())) {
+            final String mobileNumber = getMobileNumber();
+
+            if (!USER_DATA_VALIDATOR.isNull(mobileNumber)) {
+                user.setMobileNumber(mobileNumber);
+                System.out.println("Mobile number id is updated");
+            }
+        } else {
+            return;
+        }
+        System.out.println("Do you want to edit password press '1'.");
+
+        if (USER_DATA_VALIDATOR.validateAccess(SCANNER.nextLine().trim())) {
+            final String password = getPassword();
+
+            if (!USER_DATA_VALIDATOR.isNull(password)) {
+                user.setPassword(password);
+                System.out.println("Password id is updated");
+
+            }
+        }
+    }
+
+    /**
+     * <p>
+     *     Gets a valid name from the user and returns it.
+     * </p>
+     *
+     * @return the name of the user.
+     */
+    private String getName() {
+        System.out.println("Enter your name :");
+        final String name = SCANNER.nextLine().trim();
+
+        if (USER_DATA_VALIDATOR.containsToNavigateBack(name)) {
             return null;
         }
 
-        if (user.getPassword().equals(password)) {
-            return user;
-        } else {
-            System.out.println("Entered credentials are wrong !!");
-        }
-        return null;
-    }
-
-    private String getName() {
-        System.out.println("Enter your name : [Press '%' to go back]");
-        final String name = SCANNER.nextLine().trim();
-
-        if (name.equals("%")) {
-            AUTHENTICATION_VIEW.authenticateUser();
-        }
-
-        if (USER_DATA_VALIDATOR.validateName(name)) {
+        if (USER_DATA_VALIDATOR.isValidName(name)) {
             return name;
         } else {
             System.out.println("Entered Name is invalid");
         }
+
         return getName();
     }
 
+    /**
+     * <p>
+     * Gets a valid password from the user and returns it.
+     * </p>
+     *
+     * @return the password of the user.
+     */
     private String getPassword() {
         System.out.println(String.join(" ", "Create a password:[Password should contain",
-                "an uppercase, a lowercase, a special character and a digit. Minimum length is 8]",
-                "or Enter '%' to go back"));
+                "an uppercase, a lowercase, a special character and a digit. Minimum length is 8]"));
         final String password = SCANNER.nextLine().trim();
 
-        if (password.equals("%")) {
-            AUTHENTICATION_VIEW.authenticateUser();
+        if (USER_DATA_VALIDATOR.containsToNavigateBack(password)) {
+            return null;
         }
 
-        if (USER_DATA_VALIDATOR.validatePassword(password)) {
+        if (USER_DATA_VALIDATOR.isValidPassword(password)) {
             return password;
         } else {
             System.out.println("Entered password is invalid");
         }
+
         return getPassword();
     }
 
+    /**
+     * <p>
+     *     Gets a valid email id from the user and returns it.
+     * </p>
+     *
+     * @return the email id of the user.
+     */
     private String getEmailId() {
-        System.out.println("Enter your email id:[Enter '%' to go back]");
+        System.out.println("Enter your email id:");
         final String emailId = SCANNER.nextLine().trim();
 
-        if (emailId.equals("%")) {
-            AUTHENTICATION_VIEW.authenticateUser();
+        if (USER_DATA_VALIDATOR.containsToNavigateBack(emailId)) {
+            return null;
         }
 
-        if (USER_DATA_VALIDATOR.validateEmail(emailId)) {
+        if (USER_DATA_VALIDATOR.isValidEmail(emailId)) {
             return emailId;
         } else {
-            System.out.println("Entered email id is invalid. Try again!");
+            System.out.println("Entered email id is invalid.");
         }
+
         return getEmailId();
     }
 
+    /**
+     * <p>
+     * Gets a valid mobile number from the user and returns it.
+     * </p>
+     *
+     * @return the mobile number of the user.
+     */
     private String getMobileNumber() {
-        System.out.println("Choose your country code :[Enter '%' to go back]\n1.America\n2.Australia\n3.China\n4.Germany\n5.India");
+        System.out.println("Choose your country code :\n1.America\n2.Australia\n3.China\n4.Germany\n5.India");
         final String choice = SCANNER.nextLine().trim();
 
-        if (choice.equals("%")) {
-            AUTHENTICATION_VIEW.authenticateUser();
+        if (USER_DATA_VALIDATOR.containsToNavigateBack(choice)) {
+            return null;
         }
 
-        if (!Pattern.matches("^[1-5]$", choice)) {
+        if (!USER_DATA_VALIDATOR.isChoiceValid(choice)) {
             System.out.println("Invalid choice");
+
             return getMobileNumber();
         }
-        System.out.println("Enter your mobile number without country code: [Press '%' to go back] ");
+        System.out.println("Enter your mobile number with country code:");
         final String mobileNumber = SCANNER.nextLine().trim();
 
-        if (mobileNumber.equals("%")) {
-            AUTHENTICATION_VIEW.authenticateUser();
+        if (USER_DATA_VALIDATOR.containsToNavigateBack(mobileNumber)) {
+            AUTHENTICATION_VIEW.showAuthenticationPage();
         }
 
-        if (USER_DATA_VALIDATOR.validateMobileNumber(mobileNumber, choice)) {
+        if (USER_DATA_VALIDATOR.isValidMobileNumber(mobileNumber, choice)) {
             return mobileNumber;
         } else {
-            System.out.println("Entered mobile number is invalid. Try again!");
+            System.out.println("Entered mobile number is invalid.");
         }
+
         return getMobileNumber();
     }
 }
+
+

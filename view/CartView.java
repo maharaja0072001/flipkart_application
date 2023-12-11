@@ -4,7 +4,7 @@ import com.flipkart.InputHandler;
 import com.flipkart.controller.CartController;
 import com.flipkart.model.Cart;
 import com.flipkart.model.User;
-import com.flipkart.product.Product;
+import com.flipkart.model.product.Product;
 
 import java.util.List;
 import java.util.Scanner;
@@ -68,7 +68,7 @@ public class CartView {
     public void viewCart(final User user) {
         final Cart cart = CART_CONTROLLER.getUserCart(user);
 
-        if (null == cart || cart.getCartItems().isEmpty()) {
+        if (null == cart || null == cart.getCartItems()) {
             System.out.println("Cart is empty");
             return;
         }

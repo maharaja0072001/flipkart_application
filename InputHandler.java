@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  * <p>
- *     Responsible for providing scanner object.
+ * Responsible for providing scanner object.
  * </p>
  *
  * @author Maharaja S
@@ -14,11 +14,9 @@ public class InputHandler {
 
     private static Scanner scannerInstance;
 
-
     /**
      * <p>
-     *     Default constructor of InputHandler class. Kept private to restrict from
-     *     creating object outside this class.
+     * Default constructor of InputHandler class. Kept private to restrict from creating object outside this class.
      * </p>
      */
     private InputHandler() {}

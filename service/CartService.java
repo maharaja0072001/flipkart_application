@@ -2,7 +2,7 @@ package com.flipkart.service;
 
 import com.flipkart.model.Cart;
 import com.flipkart.model.User;
-import com.flipkart.product.Product;
+import com.flipkart.model.product.Product;
 
 /**
  * <p>
@@ -14,7 +14,7 @@ import com.flipkart.product.Product;
  */
 public interface CartService {
 
-    Cart getUserCart(final int userId);
+    Cart getUserCart(final User user);
 
     boolean addItemToCart(final Product product, final User user);
 

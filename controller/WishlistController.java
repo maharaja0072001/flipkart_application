@@ -1,9 +1,9 @@
 package com.flipkart.controller;
 
-import com.flipkart.dao.Impl.WishlistDAOImpl;
 import com.flipkart.model.User;
 import com.flipkart.model.Wishlist;
-import com.flipkart.product.Product;
+import com.flipkart.model.product.Product;
+import com.flipkart.service.impl2.WishlistServiceImpl;
 
 /**
  * <p>
@@ -18,8 +18,7 @@ public class WishlistController {
 
     private static WishlistController wishlistControllerInstance;
 //    private static final WishlistServiceImpl WISHLIST_SERVICE = WishlistServiceImpl.getInstance();
-    private static final WishlistDAOImpl WISHLIST_SERVICE = WishlistDAOImpl.getInstance();
-
+    private static final WishlistServiceImpl WISHLIST_SERVICE = WishlistServiceImpl.getInstance();
 
     /**
      *<p>

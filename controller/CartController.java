@@ -1,10 +1,9 @@
 package com.flipkart.controller;
 
-import com.flipkart.dao.Impl.CartDAOImpl;
 import com.flipkart.model.Cart;
 import com.flipkart.model.User;
-import com.flipkart.product.Product;
-import com.flipkart.service.impl.CartServiceImpl;
+import com.flipkart.model.product.Product;
+import com.flipkart.service.impl2.CartServiceImpl;
 
 /**
  * <p>
@@ -17,8 +16,8 @@ import com.flipkart.service.impl.CartServiceImpl;
 public class CartController {
 
     private static CartController cartControllerInstance;
-//    private static final CartServiceImpl CART_SERVICE = CartServiceImpl.getInstance();
-    private static final CartDAOImpl CART_SERVICE = CartDAOImpl.getInstance();
+//  private static final CartServiceImpl CART_SERVICE = CartServiceImpl.getInstance();
+    private static final CartServiceImpl CART_SERVICE = CartServiceImpl.getInstance();
 
     /**
      *<p>

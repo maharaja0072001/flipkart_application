@@ -4,7 +4,7 @@ import com.flipkart.InputHandler;
 import com.flipkart.controller.WishlistController;
 import com.flipkart.model.User;
 import com.flipkart.model.Wishlist;
-import com.flipkart.product.Product;
+import com.flipkart.model.product.Product;
 
 import java.util.List;
 import java.util.Scanner;
@@ -58,7 +58,7 @@ public class WishlistView{
     public void viewWishlist(final User user) {
         final Wishlist wishlist = WISHLIST_CONTROLLER.getUserWishlist(user);
 
-        if (null == wishlist || wishlist.getWishlistItems().isEmpty()) {
+        if (null == wishlist || null == wishlist.getWishlistItems()) {
             System.out.println("Wishlist is empty");
             return;
         }

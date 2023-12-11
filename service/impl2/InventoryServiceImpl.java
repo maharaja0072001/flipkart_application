@@ -1,7 +1,7 @@
 package com.flipkart.service.impl2;
 
 import com.flipkart.dao.Impl.InventoryDAOImpl;
-import com.flipkart.product.Product;
+import com.flipkart.model.product.Product;
 import com.flipkart.service.InventoryService;
 
 import java.util.List;
@@ -9,12 +9,11 @@ import java.util.List;
 public class InventoryServiceImpl implements InventoryService {
 
     private static final InventoryDAOImpl INVENTORY_DAO = InventoryDAOImpl.getInstance();
-    private static InventoryService inventoryInstance;
+    private static InventoryServiceImpl inventoryInstance;
 
-    private InventoryServiceImpl() {
-    }
+    private InventoryServiceImpl() {}
 
-    public static synchronized InventoryService getInstance() {
+    public static synchronized InventoryServiceImpl getInstance() {
         if (null == inventoryInstance) {
             inventoryInstance = new InventoryServiceImpl();
         }
@@ -34,16 +33,16 @@ public class InventoryServiceImpl implements InventoryService {
 
     @Override
     public List<Product> getMobileItems() {
-        return null;
+        return INVENTORY_DAO.getMobileItems();
     }
 
     @Override
     public List<Product> getLaptopItems() {
-        return null;
+        return INVENTORY_DAO.getLaptopItems();
     }
 
     @Override
     public List<Product> getClothesItems() {
-        return null;
+        return INVENTORY_DAO.getClothesItems();
     }
 }

@@ -21,7 +21,7 @@ public class Order {
     private final String productName;
 
     private Order(final OrderBuilder orderBuilder) {
-        this.productId = orderBuilder.quantity;
+        this.productId = orderBuilder.productId;
         this.userId = orderBuilder.userId;
         this.address = orderBuilder.address;
         this.quantity = orderBuilder.quantity;

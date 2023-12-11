@@ -1,8 +1,7 @@
 package com.flipkart.controller;
 
-import com.flipkart.dao.Impl.InventoryDAOImpl;
-import com.flipkart.product.Product;
-import com.flipkart.service.impl.InventoryServiceImpl;
+import com.flipkart.model.product.Product;
+import com.flipkart.service.impl2.InventoryServiceImpl;
 
 import java.util.List;
 
@@ -16,7 +15,7 @@ import java.util.List;
  */
 public class InventoryController {
     //private static final InventoryServiceImpl INVENTORY = InventoryServiceImpl.getInstance();
-    private static final InventoryDAOImpl INVENTORY = InventoryDAOImpl.getInstance();
+    private static final InventoryServiceImpl INVENTORY = InventoryServiceImpl.getInstance();
     private static InventoryController inventoryControllerInstance;
 
     /**

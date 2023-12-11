@@ -1,8 +1,6 @@
-package com.flipkart.product.laptop;
+package com.flipkart.model.product;
 
-import com.flipkart.product.Product;
-
-public abstract class Laptop extends Product {
+public class Laptop extends Product {
 
     private final String model;
 

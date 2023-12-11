@@ -2,7 +2,7 @@ package com.flipkart.service.impl;
 
 import com.flipkart.model.Cart;
 import com.flipkart.model.User;
-import com.flipkart.product.Product;
+import com.flipkart.model.product.Product;
 import com.flipkart.service.CartService;
 
 import java.util.HashMap;
@@ -79,10 +79,10 @@ public class CartServiceImpl implements CartService {
      * Gets the cart of the specified user id and returns it.
      * </p>
      *
-     * @param userId Refers the user id of the user.
+     * @param user Refers the user who owns the cart.
      * @return the cart of the user.
      */
-    public Cart getUserCart(final int userId) {
-        return CARTS.get(userId);
+    public Cart getUserCart(final User user) {
+        return CARTS.get(user.getUserId());
     }
 }

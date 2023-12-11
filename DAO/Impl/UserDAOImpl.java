@@ -8,6 +8,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * <p>
+ * Responsible for all the user details in the database.
+ * </p>
+ *
+ * @author Maharaja S
+ * @version 1.0
+ */
 public class UserDAOImpl {
 
     private static UserDAOImpl userServiceInstance;
@@ -23,16 +31,19 @@ public class UserDAOImpl {
     }
 
     public boolean createNewUser(final User user) {
-        try (final PreparedStatement preparedStatement = DBConnection.getConnection().prepareStatement("insert into users(name, mobile_number, email, password) values(?, ?, ?, ?)")) {
+        try (final PreparedStatement preparedStatement = DBConnection.getConnection().prepareStatement("insert into users(name, mobile_number, email, password) values(?, ?, ?, ?) returning id")) {
 
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getMobileNumber());
             preparedStatement.setString(3, user.getEmailId());
             preparedStatement.setString(4, user.getPassword());
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-            final int updatedRows = preparedStatement.executeUpdate();
+            resultSet.next();
+            final int userId = resultSet.getInt(1) ;
 
-            return 0 != updatedRows;
+            user.setUserId(userId);
+            return true;
         } catch (SQLException exception) {
             throw new DatabaseException(exception.getMessage());
         }

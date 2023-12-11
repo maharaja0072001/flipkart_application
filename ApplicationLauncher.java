@@ -4,7 +4,7 @@ import com.flipkart.view.AuthenticationView;
 
 /**
  * <p>
- * Responsible for launching the flipkart application and showing menu for user login and signup.
+ * Responsible for launching the flipkart application .
  * </p>
  *
  * @author Maharaja S

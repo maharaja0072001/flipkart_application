@@ -15,6 +15,7 @@ import java.util.List;
 public interface OrderService {
 
    void addOrder(final int userId, final Order order);
+
    List<Order> getOrders(final int userId);
 
 }

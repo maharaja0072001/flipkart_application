@@ -1,7 +1,7 @@
 package com.flipkart.view.filter;
 
 import com.flipkart.InputHandler;
-import com.flipkart.product.Product;
+import com.flipkart.model.product.Product;
 
 import java.util.ArrayList;
 import java.util.List;

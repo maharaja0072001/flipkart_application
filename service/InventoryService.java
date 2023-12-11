@@ -1,6 +1,6 @@
 package com.flipkart.service;
 
-import com.flipkart.product.Product;
+import com.flipkart.model.product.Product;
 
 import java.util.List;
 

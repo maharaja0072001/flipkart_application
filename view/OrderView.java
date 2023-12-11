@@ -5,7 +5,7 @@ import com.flipkart.PaymentMode;
 import com.flipkart.controller.OrderController;
 import com.flipkart.model.Order;
 import com.flipkart.model.User;
-import com.flipkart.product.Product;
+import com.flipkart.model.product.Product;
 import com.flipkart.view.datavalidation.UserDataValidator;
 
 import java.util.List;
@@ -28,8 +28,7 @@ public class OrderView {
 
     /**
      * <p>
-     *     Default constructor of OrderView class. Kept private to restrict from
-     *     creating object outside this class.
+     *     Default constructor of OrderView class. Kept private to restrict from creating object outside this class.
      * </p>
      */
     private OrderView() {}
@@ -53,11 +52,13 @@ public class OrderView {
      * <p>
      * Shows the order details of the user.
      * </p>
+     *
+     * @param user Refers the user whose orders will be shown.
      */
     public void viewMyOrders(final User user) {
         final List<Order> orders = ORDER_CONTROLLER.getOrders(user.getUserId());
 
-        if (null == orders) {
+        if (null == orders || orders.isEmpty()) {
             System.out.println("No orders found");
         } else {
             for (int i = 0; i < orders.size(); i++) {
@@ -66,6 +67,11 @@ public class OrderView {
         }
     }
 
+    /**
+     * <p>
+     * Places the order for the user.
+     * </p>
+     */
     public void placeOrder(final Product product, final User user){
         int productQuantity;
 

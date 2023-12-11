@@ -2,9 +2,7 @@ package com.flipkart.service;
 
 import com.flipkart.model.User;
 import com.flipkart.model.Wishlist;
-import com.flipkart.product.Product;
-
-import java.util.List;
+import com.flipkart.model.product.Product;
 
 /**
  * <p>
@@ -41,5 +39,5 @@ public interface WishlistService {
      *
      * @return the items in the wishlist.
      */
-    Wishlist getUserWishlist(final int userId);
+    Wishlist getUserWishlist(final User user);
 }

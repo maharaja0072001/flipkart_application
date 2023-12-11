@@ -1,6 +1,6 @@
 package com.flipkart.service.impl;
 
-import com.flipkart.product.Product;
+import com.flipkart.model.product.Product;
 import com.flipkart.service.InventoryService;
 import com.flipkart.ProductCategory;
 

@@ -1,12 +1,12 @@
-package com.flipkart.product;
+package com.flipkart.model.product;
 
 public abstract class Product {
+
     private static int uniqueProductId = 1;
     private int productId;
     private final String productType;
     private float price;
     private final String brandName;
-
 
     public Product(final String productType, final float price, final String brandName) {
         this.productType = productType;

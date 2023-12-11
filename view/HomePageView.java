@@ -3,7 +3,7 @@ package com.flipkart.view;
 import com.flipkart.InputHandler;
 import com.flipkart.controller.InventoryController;
 import com.flipkart.model.User;
-import com.flipkart.product.Product;
+import com.flipkart.model.product.Product;
 import com.flipkart.InventoryManager;
 import com.flipkart.view.datavalidation.UserDataValidator;
 
@@ -63,7 +63,7 @@ public class HomePageView {
 
     /**
      * <p>
-     * Shows the home page of the flipkart application to the user for shopping the products..
+     * Shows the home page of the flipkart application to the user for shopping the products.
      * </p>
      */
     public void showHomePage(final User user) {

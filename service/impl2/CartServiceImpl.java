@@ -3,31 +3,33 @@ package com.flipkart.service.impl2;
 import com.flipkart.dao.Impl.CartDAOImpl;
 import com.flipkart.model.Cart;
 import com.flipkart.model.User;
-import com.flipkart.product.Product;
+import com.flipkart.model.product.Product;
+import com.flipkart.service.CartService;
 
-public class CartServiceImpl {
+public class CartServiceImpl implements CartService {
 
-    private final CartDAOImpl cartDAO = new CartDAOImpl();
+    private static final CartDAOImpl CART_DAO = CartDAOImpl.getInstance();
+    private static CartServiceImpl cartServiceInstance ;
 
-    public void addItemToCart(final Product item) {
+    private CartServiceImpl() {}
 
+    public static synchronized CartServiceImpl getInstance() {
+        if (null == cartServiceInstance) {
+            cartServiceInstance = new CartServiceImpl();
+        }
+
+        return cartServiceInstance;
     }
 
-
-    public void removeItemFromCart(Product item) {
-
-    }
-    public void setIdForCart(final int id) {
-        cartDAO.setIdForCart(id);
+    public boolean addItemToCart(final Product product, final User user) {
+        return CART_DAO.addItemToCart(product, user);
     }
 
+    public void removeItemFromCart(final Product product, final User user) {
+        CART_DAO.removeItemFromCart(product, user);
+    }
 
     public Cart getUserCart(final User user) {
-        return cartDAO.getUserCart(user);
-    }
-
-
-    public float getTotalAmountInCart() {
-        return 0;
+        return CART_DAO.getUserCart(user);
     }
 }

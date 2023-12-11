@@ -2,7 +2,7 @@ package com.flipkart.service.impl;
 
 import com.flipkart.model.User;
 import com.flipkart.model.Wishlist;
-import com.flipkart.product.Product;
+import com.flipkart.model.product.Product;
 import com.flipkart.service.WishlistService;
 
 import java.util.HashMap;
@@ -19,6 +19,7 @@ import java.util.Map;
 public class WishlistServiceImpl implements WishlistService {
 
     private static WishlistServiceImpl wishlistServiceInstance;
+
     private static final Map<Integer, Wishlist> WISHLISTS = new HashMap<>();
 
     /**
@@ -78,11 +79,11 @@ public class WishlistServiceImpl implements WishlistService {
      * Gets the wishlist of the specified user id and returns it.
      * </p>
      *
-     * @param userId Refers the user id of the user.
+     * @param user Refers the user who owns the wishlist.
      * @return the wishlist of the user.
      */
-    public Wishlist getUserWishlist(final int userId) {
-        return WISHLISTS.get(userId);
+    public Wishlist getUserWishlist(final User user) {
+        return WISHLISTS.get(user.getUserId());
     }
 
 }

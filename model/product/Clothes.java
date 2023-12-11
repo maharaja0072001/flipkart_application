@@ -1,8 +1,6 @@
-package com.flipkart.product.clothes;
+package com.flipkart.model.product;
 
-import com.flipkart.product.Product;
-
-public abstract class Clothes extends Product {
+public class Clothes extends Product {
 
     private final String gender;
     private final String size;

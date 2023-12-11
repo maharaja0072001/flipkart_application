@@ -11,6 +11,7 @@ import java.util.Properties;
 public class DBConnection {
 
     private static Connection connection;
+
     private DBConnection() {}
 
     public static Connection getConnection() throws SQLException {
@@ -23,6 +24,7 @@ public class DBConnection {
                 throw new RuntimeException("File not found");
             }
             final Properties properties = new Properties();
+
             try {
                 properties.load(fileReader);
             } catch (IOException e) {

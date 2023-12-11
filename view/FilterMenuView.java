@@ -2,7 +2,7 @@ package com.flipkart.view;
 
 import com.flipkart.InputHandler;
 import com.flipkart.model.User;
-import com.flipkart.product.Product;
+import com.flipkart.model.product.Product;
 import com.flipkart.view.datavalidation.UserDataValidator;
 import com.flipkart.view.filter.PriceFilter;
 import com.flipkart.view.filter.RateHighToLowFilter;
@@ -29,8 +29,7 @@ public class FilterMenuView {
 
     /**
      * <p>
-     *     Default constructor of FilterMenuView class. Kept private to restrict from
-     *     creating object outside this class.
+     * Default constructor of FilterMenuView class. Kept private to restrict from creating object outside this class.
      * </p>
      */
     private FilterMenuView() {}
@@ -52,8 +51,11 @@ public class FilterMenuView {
 
     /**
      * <p>
-     *     Shows the filter options to the user to filter the items presented in the inventory.
+     * Shows the filter menu to the user to filter the items presented in the inventory.
      * </p>
+     *
+     * @param user Refers the current logged-in user.
+     * @param inventoryItems Refers the products in the inventory.
      */
     public void showFilterMenu(final User user, final List<Product> inventoryItems) {
         boolean exit = false;
@@ -118,8 +120,10 @@ public class FilterMenuView {
 
     /**
      * <p>
-     *     Gets the choice from the user to add the item to the cart or wishlist.
+     * Gets the choice from the user to add the item to the cart or wishlist.
      * </p>
+     * @param item Refers the item to add to cart or wishlist
+     * @param user Refers the current logged_in user.
      */
     public void addItemToCartOrWishlist(final Product item, final User user) {
         int choice;
@@ -153,10 +157,12 @@ public class FilterMenuView {
 
     /**
      * <p>
-     *     Gets the specific item from the inventory which was selected by the user and return it.
+     * Gets the specific item from the inventory which was selected by the user and return it.
      *
-     * @return the item selected by the user.
      * </p>
+     *
+     *  @return the item selected by the user.
+     * @param items Refers the products in the inventory.
      */
     public Product getSelectedItem(final List<Product> items) {
         int index;
@@ -192,8 +198,10 @@ public class FilterMenuView {
 
     /**
      * <p>
-     *     Shows the list of items to the user.
+     * Shows the list of items to the user.
      * </p>
+     *
+     * @param items Refers the products in the inventory.
      */
     public void showItems(final List<Product> items) {
         for (int i = 0; i < items.size(); i++) {

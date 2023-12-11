@@ -1,9 +1,7 @@
 package com.flipkart.controller;
 
-import com.flipkart.dao.Impl.UserDAOImpl;
 import com.flipkart.model.User;
-import com.flipkart.service.UserService;
-import com.flipkart.service.impl.UserServiceImpl;
+import com.flipkart.service.impl2.UserServiceImpl;
 
 /**
  * <p>
@@ -17,7 +15,7 @@ public class UserController {
 
     private static UserController userControllerInstance;
 //    private static final UserService USER_SERVICE = UserServiceImpl.getInstance();
-    private static final UserDAOImpl USER_SERVICE = UserDAOImpl.getInstance();
+    private static final UserServiceImpl USER_SERVICE = UserServiceImpl.getInstance();
 
 
     private UserController() {}

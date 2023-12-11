@@ -23,8 +23,7 @@ public class AuthenticationView {
 
     /**
      * <p>
-     *     Default constructor of AuthenticationView class. Kept private to restrict from
-     *     creating object outside this class.
+     * Default constructor of AuthenticationView class. Kept private to restrict from creating object outside this class.
      * </p>
      */
     private AuthenticationView() {}
@@ -70,7 +69,7 @@ public class AuthenticationView {
                     System.out.println("Enter correct choice!");
             }
             showAuthenticationPage();
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException exception) {
             System.out.println("Input is invalid. Enter a valid number");
             showAuthenticationPage();
         } catch (SQLException exception) {

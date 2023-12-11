@@ -1,17 +1,17 @@
 package com.flipkart;
 
 import com.flipkart.controller.InventoryController;
-import com.flipkart.product.Clothes;
-import com.flipkart.product.Laptop;
-import com.flipkart.product.Mobile;
-import com.flipkart.product.Product;
+import com.flipkart.model.product.Clothes;
+import com.flipkart.model.product.Laptop;
+import com.flipkart.model.product.Mobile;
+import com.flipkart.model.product.Product;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * <p>
- *     Responsible for creating all products and adding them to the inventory
+ * Responsible for creating all products and adding them to the inventory.
  * </p>
  *
  * @author Maharaja S
@@ -24,8 +24,7 @@ public class InventoryManager {
 
     /**
      * <p>
-     *     Default constructor of InventoryManager class. Kept private to restrict from
-     *     creating object outside this class.
+     * Default constructor of InventoryManager class. Kept private to restrict from creating object outside this class.
      * </p>
      */
     private InventoryManager() {}
@@ -44,6 +43,7 @@ public class InventoryManager {
 
         return inventoryManagerInstance;
     }
+
     /**
      * <p>
      * Creates all the products and add them to the inventory.
@@ -74,7 +74,6 @@ public class InventoryManager {
         allProducts.add(new Laptop("Dell", "Inspiron 5620", 80000));
         allProducts.add(new Laptop("Dell", "Latitude", 23000));
         allProducts.add(new Laptop("Acer", "Aspire Lite", 30000));
-        allProducts.add(new Laptop("Acer", "Aspire Lite", 30000));
         allProducts.add(new Laptop("Acer", "Aspire 3", 42000));
         allProducts.add(new Laptop("Acer", "one 14", 23000));
         allProducts.add(new Laptop("Acer", "Extensa", 27500));
@@ -91,25 +90,22 @@ public class InventoryManager {
         allProducts.add(new Clothes("Tshirt", "Women", "M", 9000, "MAX"));
         allProducts.add(new Clothes("Tshirt", "Men" , "L", 1500, "JACK & JONES"));
         allProducts.add(new Clothes("Tshirt", "Men", "S", 800, "Levi's"));
-        allProducts.add(new Clothes("Tshirt", "Men", "L", 1000, "JACK & JONES"));
-        allProducts.add(new Clothes("Tshirt", "Women", "XXL", 2500, "Levi's"));
         allProducts.add(new Clothes("Tshirt", "Women", "M", 2200, "JACK & JONES"));
         allProducts.add(new Clothes("Tshirt", "Men" , "L", 1600, "Levi's"));
         allProducts.add(new Clothes("Shirt", "Men", "M", 1600,"MAX"));
         allProducts.add(new Clothes("Shirt", "Men", "L", 1000, "JACK & JONES"));
         allProducts.add(new Clothes("Shirt", "Women", "XXL", 3500, "JACK & JONES"));
         allProducts.add(new Clothes("Shirt", "Women", "M", 800, "MAX"));
-        allProducts.add(new Clothes("Shirt", "Men" , "L", 1500, "JACK & JONES"));
         allProducts.add(new Clothes("Shirt", "Men", "M", 1600, "JACK & JONES"));
         allProducts.add(new Clothes("Shirt", "Men", "L", 7000, "MAX"));
         allProducts.add(new Clothes("Shirt", "Women", "XXL", 2300, "Levi's"));
         allProducts.add(new Clothes("Shirt", "Women", "M", 1800, "Levi's"));
-        allProducts.add(new Clothes("Shirt", "Men" , "L", 5000, "JACK & JONES"));
-        allProducts.add(new Clothes("Pants", "Men", "M", 1600, "JACK & JONES"));
+        allProducts.add(new Clothes("Shirt", "Men" , "XL", 5000, "JACK & JONES"));
+        allProducts.add(new Clothes("Pants", "Men", "XXL", 1600, "JACK & JONES"));
         allProducts.add(new Clothes("Pants", "Men", "L", 1200, "MAX"));
         allProducts.add(new Clothes("Pants", "Women", "XXL", 2500, "JACK & JONES"));
         allProducts.add(new Clothes("Pants", "Women", "M", 5800, "Levi's"));
-        allProducts.add(new Clothes("Pants", "Men" , "L", 1500, "MAX"));
+        allProducts.add(new Clothes("Pants", "Men" , "XXL", 1500, "MAX"));
         allProducts.add(new Clothes("Pants", "Men", "M", 2600, "JACK & JONES"));
         allProducts.add(new Clothes("Pants", "Men", "L", 4000, "Levi's"));
         allProducts.add(new Clothes("Pants", "Women", "XXL", 3500, "MAX"));

@@ -1,9 +1,10 @@
 package com.flipkart.service;
 
 import com.flipkart.model.User;
+
 /**
  * <p>
- * Provides service for the User.
+ * Provides the service for the User.
  * </p>
  *
  * @author Maharaja S
@@ -17,7 +18,7 @@ public interface UserService {
      * </p>
      *
      * @return true if the user created or false if user already exists.
-     * @param user Refers {@link User} the user to be created.
+     * @param user Refers the {@link User}to be created.
      */
     boolean createNewUser(final User user);
 
@@ -26,9 +27,9 @@ public interface UserService {
      * Gets the existing user by the given credentials.
      * </p>
      *
-     * @return User if the credentials are correct and user exists or null otherwise.
      * @param mobileNumber Refers the mobile number of the user
      * @param password Refers the password of the user.
+     * @return {@link User} if the credentials are correct and the user exists or null otherwise.
      */
     User getExistingUser(final String mobileNumber, final String password);
 

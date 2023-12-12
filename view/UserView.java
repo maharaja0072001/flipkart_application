@@ -8,7 +8,9 @@ import com.flipkart.view.datavalidation.UserDataValidator;
 import java.util.Scanner;
 
 /**
+ * <p>
  * Responsible for creating, validating the users and updating and printing the user details.
+ * </p>
  *
  * @author Maharaja S
  * @version 1.0
@@ -23,13 +25,16 @@ public class UserView {
     private static UserView userViewInstance;
 
     /**
-     * Default constructor for UserView class.Kept private to restrict from
-     * creating object outside this class.
+     * <p>
+     * Default constructor for UserView class.Kept private to restrict from creating object outside this class.
+     * </p>
      */
     private UserView() {}
 
     /**
+     * <p>
      * Creates a single object of UserView class and returns it.
+     * </p>
      *
      * @return the single instance of UserView class.
      */
@@ -42,9 +47,10 @@ public class UserView {
     }
 
     /**
-     * Creates a new user by getting details from the user
+     * <p>
+     * Creates a new user by getting details from the user.
+     * </p>
      *
-     * @return true if user created successfully or false otherwise. //
      */
     public void createNewUser() {
         final User user = new User();
@@ -89,9 +95,9 @@ public class UserView {
     }              
 
     /**
+     * <p>
      * Authenticates the existing user by the details given by the user.
-     *
-     * @return true if the entered details of existing user are correct or false otherwise.
+     * </p>
      */
     public void validateUser() {
         System.out.println("Enter the credentials to login. Press '$' to go back");
@@ -117,9 +123,11 @@ public class UserView {
     }
 
     /**
+     * <p>
      * shows the profile of the user and updates the details chosen by the user.
+     * </p>
      *
-     * @param user  current user to view the profile and edit the details
+     * @param user Refers the current {@link User}
      */
     public void viewAndEditProfile(final User user) {
 
@@ -136,9 +144,11 @@ public class UserView {
     }
 
     /**
-     * Updates the selected user details chosen by the user.
+     * <p>
+     * Updates the details of the current user .
+     * </p>
      *
-     * @param user current user to update the details
+     * @param user Refers the current {@link User}
      */
     private void updateUserDetails(final User user) {
         System.out.println("Do you want to edit name press '1'.");
@@ -192,7 +202,7 @@ public class UserView {
 
     /**
      * <p>
-     *     Gets a valid name from the user and returns it.
+     * Gets a valid name from the user and returns it.
      * </p>
      *
      * @return the name of the user.
@@ -241,7 +251,7 @@ public class UserView {
 
     /**
      * <p>
-     *     Gets a valid email id from the user and returns it.
+     * Gets a valid email id from the user and returns it.
      * </p>
      *
      * @return the email id of the user.

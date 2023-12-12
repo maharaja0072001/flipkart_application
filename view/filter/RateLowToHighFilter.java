@@ -21,8 +21,7 @@ public class RateLowToHighFilter implements ProductFilter {
 
     /**
      * <p>
-     *     Default constructor of RateLowToHighFilter class. Kept private to restrict from
-     *     creating object outside this class.
+     * Default constructor of RateLowToHighFilter class. Kept private to restrict from creating object outside this class.
      * </p>
      */
     private RateLowToHighFilter() {}
@@ -44,10 +43,10 @@ public class RateLowToHighFilter implements ProductFilter {
 
     /**
      * <p>
-     * filters the items present in the inventory based on price low to high and returns it.
+     * Filters the items present in the inventory based on price low to high and returns it.
      * </p>
      *
-     * @return the items filtered by price low to high.
+     * @return all the products filtered by price from low to high.
      */
     public List<Product> getFilteredItems(final List<Product> inventoryItems) {
         FILTERED_ITEMS.clear();

@@ -1,5 +1,7 @@
 package com.flipkart.model;
 
+import com.flipkart.OrderStatus;
+
 /**
  * <p>
  *     Represents a order placed by the user.
@@ -19,6 +21,7 @@ public class Order {
     private final String address;
     private final String paymentMode;
     private final String productName;
+    private OrderStatus orderStatus;
 
     private Order(final OrderBuilder orderBuilder) {
         this.productId = orderBuilder.productId;
@@ -29,6 +32,7 @@ public class Order {
         this.totalAmount = orderBuilder.totalAmount;
         this.paymentMode = orderBuilder.paymentMode;
         this.id = orderBuilder.id;
+        this.orderStatus = orderBuilder.orderStatus;
     }
 
     public int getId() {
@@ -62,14 +66,23 @@ public class Order {
     public String getProductName() {
         return productName;
     }
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(final OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
     @Override
     public String toString() {
-        return String.format("Order id :%d\nproduct name : %s\nproduct quantity : %d\ntotal amount : %.2f\nPayment mode : %s\nShipping address : %s",
-                id, productName, quantity, totalAmount, paymentMode, address);
+        return String.format("Order id :%d\nproduct name : %s\nproduct quantity : %d\ntotal amount : %.2f\nPayment mode : %s\nShipping address : %s\nStatus : %s",
+                id, productName, quantity, totalAmount, paymentMode, address, orderStatus.toString());
     }
 
     public static class OrderBuilder {
-        private final int id;
+        private int id;
         private final int userId;
         private final int productId;
         private int quantity;
@@ -77,6 +90,7 @@ public class Order {
         private String address;
         private final String paymentMode;
         private String productName;
+        private OrderStatus orderStatus;
 
         public OrderBuilder(final int userId, final int productId, final String paymentMode) {
            this.userId = userId;
@@ -90,6 +104,11 @@ public class Order {
             return this;
         }
 
+        public OrderBuilder setId(final int id) {
+            this.id = id;
+            return this;
+        }
+
         public OrderBuilder setTotalAmount(final float totalAmount) {
             this.totalAmount = totalAmount;
             return this;
@@ -99,8 +118,14 @@ public class Order {
             this.quantity = quantity;
             return this;
         }
+
         public OrderBuilder setProductName(final String productName) {
             this.productName = productName;
+            return this;
+        }
+
+        public OrderBuilder setOrderStatus(final OrderStatus orderStatus) {
+            this.orderStatus = orderStatus;
             return this;
         }
 

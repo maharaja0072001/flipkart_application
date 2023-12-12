@@ -21,7 +21,8 @@ public class ApplicationLauncher {
      */
     public static void main(final String[] args) {
         final AuthenticationView authenticationView = AuthenticationView.getInstance();
-
+                                              
         authenticationView.showAuthenticationPage();
+        //in cart userId and product id will be unique.
     }
 }

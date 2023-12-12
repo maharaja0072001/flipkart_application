@@ -25,8 +25,7 @@ public class PriceFilter implements ProductFilter {
 
     /**
      * <p>
-     *     Default constructor of PriceFilter class. Kept private to restrict from
-     *     creating object outside this class.
+     * Default constructor of PriceFilter class. Kept private to restrict from creating object outside this class.
      * </p>
      */
     private PriceFilter() {}
@@ -48,7 +47,7 @@ public class PriceFilter implements ProductFilter {
 
     /**
      * <p>
-     * filters the inventory based on the price range given by the user and returns the filtered items.
+     * Filters the inventory based on the price range given by the user and returns the filtered items.
      * </p>
      *
      * @return the filtered items of given price range.

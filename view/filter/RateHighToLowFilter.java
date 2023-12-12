@@ -20,8 +20,7 @@ public class RateHighToLowFilter implements ProductFilter {
 
     /**
      * <p>
-     *     Default constructor of RateHighToLowFilter class. Kept private to restrict from
-     *     creating object outside this class.
+     * Default constructor of RateHighToLowFilter class. Kept private to restrict from creating object outside this class.
      * </p>
      */
     private RateHighToLowFilter() {}
@@ -43,7 +42,7 @@ public class RateHighToLowFilter implements ProductFilter {
 
     /**
      * <p>
-     * filters the items present in the inventory based on price high to low and returns it.
+     * Filters the items present in the inventory based on price high to low and returns it.
      * </p>
      *
      * @return the items filtered by price high to low.

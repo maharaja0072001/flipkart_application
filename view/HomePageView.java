@@ -65,6 +65,8 @@ public class HomePageView {
      * <p>
      * Shows the home page of the flipkart application to the user for shopping the products.
      * </p>
+     *
+     * @param user Refers the current {@link User}.
      */
     public void showHomePage(final User user) {
         while (true) {
@@ -90,7 +92,7 @@ public class HomePageView {
                         WISHLIST_VIEW.viewWishlist(user);
                         break;
                     case 6:
-                        ORDER_VIEW.viewMyOrders(user);
+                        ORDER_VIEW.viewAndCancelOrder(user);
                         break;
                     case 7:
                         USER_VIEW.viewAndEditProfile(user);
@@ -109,20 +111,23 @@ public class HomePageView {
 
     /**
      * <p>
-     * Gets choice from the user to add to cart or wishlist or show filtered items to the user
+     * Gets choice from the user to add to cart or wishlist or show filtered products to the user
      * </p>
+     *
+     * @param user Refers the current {@link User}.
+     * @param products Refers the products in the inventory.
      */
-    private void addToCartOrWishlist(final User user, final List<Product> items) {
-                int index;
+    private void addToCartOrWishlist(final User user, final List<Product> products) {
+        int index;
 
-        FILTER_MENU_VIEW.showItems(items);
+        FILTER_MENU_VIEW.showItems(products);
 
         while (true) {
             System.out.println("Enter the product id to add to cart or wishlist or '#' to show filter menu or press '$' to go back");
             final String choice = SCANNER.nextLine().trim();
 
             if (USER_DATA_VALIDATOR.containsToFilterMenu(choice)) {
-                FILTER_MENU_VIEW.showFilterMenu(user, items);
+                FILTER_MENU_VIEW.showFilterMenu(user, products);
                 return;
             }
 
@@ -137,12 +142,12 @@ public class HomePageView {
                 continue;
             }
 
-            if (index > items.size() || index <= 0) {
+            if (index > products.size() || index <= 0) {
                 System.out.println("Enter a valid product id");
                 continue;
             }
 
-            final Product selectedItem = items.get(--index);
+            final Product selectedItem = products.get(--index);
             FILTER_MENU_VIEW.addItemToCartOrWishlist(selectedItem, user);
         }
     }

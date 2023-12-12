@@ -22,8 +22,8 @@ public class CartServiceImpl implements CartService {
     private static final Map<Integer, Cart> CARTS = new HashMap<>();
 
     /**
-     *<p>
-     *Default constructor of the CartServiceImpl class. kept private to restrict from creating object from outside of this class.
+     * <p>
+     * Default constructor of the CartServiceImpl class. kept private to restrict from creating object from outside of this class.
      * </p>
      */
     private CartServiceImpl() {}
@@ -45,11 +45,11 @@ public class CartServiceImpl implements CartService {
 
     /**
      * <p>
-     * Adds the product to the cart of the specified user.
+     * Adds the product to the cart of the user.
      * </p>
      *
-     * @param product Refers the product to be added
-     * @param user Refers the user
+     * @param product Refers the {@link Product} to be added to the cart.
+     * @param user Refers the current {@link User}.
      */
     public boolean addItemToCart(final Product product, final User user) {
         if (!CARTS.containsKey(user.getUserId())) {
@@ -62,11 +62,11 @@ public class CartServiceImpl implements CartService {
 
     /**
      * <p>
-     * Removes the product to the cart of the specified user.
-     * * </p>
+     * Removes the specific product from the cart.
+     * </p>
      *
-     * @param product Refers the product to be added
-     * @param user Refers the user
+     * @param user Refers the current {@link User}
+     * @param product Refers the {@link Product} to be removed from the cart.
      */
     public void removeItemFromCart(final Product product, final User user) {
         final Cart cart = CARTS.get(user.getUserId());
@@ -76,11 +76,11 @@ public class CartServiceImpl implements CartService {
 
     /**
      * <p>
-     * Gets the cart of the specified user id and returns it.
+     * Gets the cart of the current user and returns it.
      * </p>
      *
-     * @param user Refers the user who owns the cart.
-     * @return the cart of the user.
+     * @param user Refers the current {@link User}
+     * @return the {@link Cart} of the user.
      */
     public Cart getUserCart(final User user) {
         return CARTS.get(user.getUserId());

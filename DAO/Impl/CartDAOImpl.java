@@ -26,9 +26,21 @@ public class CartDAOImpl {
 
     private static CartDAOImpl cartDAOImplInstance;
 
+    /**
+     * <p>
+     * Default constructor of the CartDAOImpl class. kept private to restrict from creating object from outside of this class.
+     * </p>
+     */
     private CartDAOImpl() {}
 
-    public static CartDAOImpl getInstance() {
+    /**
+     * <p>
+     * Creates a single object of CartDAOImpl Class and returns it.
+     * </p>
+     *
+     * @return returns the single instance of CartDAOImpl Class.
+     */
+    public static synchronized CartDAOImpl getInstance() {
         if (null == cartDAOImplInstance) {
             cartDAOImplInstance = new CartDAOImpl();
         }
@@ -41,9 +53,9 @@ public class CartDAOImpl {
      * Adds the product to the cart in the database.
      * </p>
      *
-     * @param product Refers the product to be added.
-     * @param user Refers the current logged-in user.
-     * @return true is the product is added.
+     * @param product Refers the {@link Product} to be added.
+     * @param user Refers the current {@link User}.
+     * @return true is the product is added to the cart.
      */
     public boolean addItemToCart(final Product product, final User user) {
         try (final PreparedStatement preparedStatement = DBConnection.getConnection().prepareStatement("insert into cart (user_id , product_id) values(?,?)")) {
@@ -61,8 +73,8 @@ public class CartDAOImpl {
      * Removes the product from the cart in the database.
      * </p>
      *
-     * @param product Refers the product to be added.
-     * @param user Refers the current logged-in user.
+     * @param product Refers the {@link Product} to be removed from the cart.
+     * @param user Refers the current {@link User}.
      */
     public void removeItemFromCart(final Product product, final User user) {
         try (final PreparedStatement preparedStatement = DBConnection.getConnection().prepareStatement("delete from cart where user_id =? and product_id =?")) {
@@ -81,8 +93,8 @@ public class CartDAOImpl {
      * Gets the cart to the user from the database.
      * </p>
      *
-     * @param user Refers the current logged-in user.
-     * @return cart of the user.
+     * @param user Refers the current {@link User}.
+     * @return {@link Cart} of the user.
      */
     public Cart getUserCart(final User user) {
         final Cart cart = new Cart(user);

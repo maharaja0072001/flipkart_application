@@ -16,7 +16,6 @@ import java.sql.SQLException;
 
 /**
  * <p>
- * Responsible for handling user creation and authentication.
  * </p>
  *
  * @author Maharaja S
@@ -100,7 +99,6 @@ public class WishlistDAOImpl {
 
                     clothes.setProductId(productId);
                     wishlist.addItemToWishlist(clothes);
-
                 }
             }
 

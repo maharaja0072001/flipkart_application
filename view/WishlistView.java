@@ -26,11 +26,9 @@ public class WishlistView{
 
     /**
      * <p>
-     *     Default constructor of WishlistView class. Kept private to restrict from
-     *     creating object outside this class.
+     * Default constructor of WishlistView class. Kept private to restrict from creating object outside this class.
      * </p>
      */
-
     private WishlistView() {}
 
     /**
@@ -53,7 +51,7 @@ public class WishlistView{
      * Shows the wishlist items to the user and the user can add the items to the cart
      * </p>
      *
-     * @param user Refers the user to show the wishlist of that user.
+     * @param user Refers {@link User} to show the wishlist of that user.
      */
     public void viewWishlist(final User user) {
         final Wishlist wishlist = WISHLIST_CONTROLLER.getUserWishlist(user);
@@ -76,29 +74,30 @@ public class WishlistView{
 
         if (!(productId > wishlistItems.size() || productId <=0)) {
                 final Product product = wishlistItems.get(productId-1);
+
                 if ("1".equals(choice)) {
                      if (CART_VIEW.addToCart(product, user)) {
-                    System.out.println("Item added to cart");
+                         System.out.println("Item added to cart");
+                     }
+                } else if ("2".equals(choice)) {
+                    WISHLIST_CONTROLLER.removeItemFromCart(product, user);
+                    System.out.println("Item removed");
                 }
-            } else if ("2".equals(choice)) {
-            WISHLIST_CONTROLLER.removeItemFromCart(product, user);
-            System.out.println("Item removed");
+        } else {
+            System.out.println("Invalid product id");
         }
-    } else {
-                System.out.println("Invalid product id");
-            }
     }
 
     /**
      * <p>
-     * Adds the specific item to the wishlist
+     * Adds the specific product to the wishlist
      * </p>
      *
-     * @param item Refers the item to be added
-     * @param user Refers the user to which the item will be added to the wishlist of that user.
+     * @param product Refers the product to be added
+     * @param user Refers {@link User} who owns the wishlist.
      */
-    public boolean addToWishlist(final Product item, final User user) {
-        return WISHLIST_CONTROLLER.addToWishlist(item, user);
+    public boolean addToWishlist(final Product product, final User user) {
+        return WISHLIST_CONTROLLER.addToWishlist(product, user);
     }
 
     /**
@@ -117,7 +116,7 @@ public class WishlistView{
                 System.out.println("Enter the productId to add to cart or remove from wishlist:");
                 productId = Integer.parseInt(scanner.nextLine().trim());
                 break;
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException exception) {
                 System.out.println("Invalid input. Enter a number.");
             }
         }

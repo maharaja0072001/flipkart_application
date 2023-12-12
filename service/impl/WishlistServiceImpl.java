@@ -19,12 +19,11 @@ import java.util.Map;
 public class WishlistServiceImpl implements WishlistService {
 
     private static WishlistServiceImpl wishlistServiceInstance;
-
     private static final Map<Integer, Wishlist> WISHLISTS = new HashMap<>();
 
     /**
-     *<p>
-     *Default constructor of the WishlistServiceImpl class. kept private to restrict from creating object from outside of this class.
+     * <p>
+     * Default constructor of the WishlistServiceImpl class. kept private to restrict from creating object from outside of this class.
      * </p>
      */
     private WishlistServiceImpl() {}
@@ -46,11 +45,12 @@ public class WishlistServiceImpl implements WishlistService {
 
     /**
      * <p>
-     * Adds the product to the cart of the specified user.
-     * * </p>
+     * Adds the specific product to the wishlist
+     * </p>
      *
-     * @param product Refers the product to be added
-     * @param user Refers the user
+     * @param user Refers the current {@link User}
+     * @param product Refers {@link Product} to be added to the wishlist.
+     * @return true if the product is added.
      */
     public boolean addToWishlist(final Product product, final User user) {
         if (!WISHLISTS.containsKey(user.getUserId())) {
@@ -60,13 +60,14 @@ public class WishlistServiceImpl implements WishlistService {
 
          return wishlist.addItemToWishlist(product);
     }
+
     /**
      * <p>
-     * Adds the product to the cart of the specified user.
-     * * </p>
+     * Removes the specific product from the wishlist
+     * </p>
      *
-     * @param product Refers the product to be added
-     * @param user Refers the user
+     * @param user Refers the current {@link User}
+     * @param product Refers {@link Product} the product to be removed.
      */
     public void removeFromWishlist(final Product product, final User user) {
         final Wishlist wishlist = WISHLISTS.get(user.getUserId());
@@ -76,11 +77,11 @@ public class WishlistServiceImpl implements WishlistService {
 
     /**
      * <p>
-     * Gets the wishlist of the specified user id and returns it.
+     * Gets the wishlist of the current user and returns it.
      * </p>
      *
-     * @param user Refers the user who owns the wishlist.
-     * @return the wishlist of the user.
+     * @param user Refers the current {@link User}.
+     * @return the {@link Wishlist} of the user.
      */
     public Wishlist getUserWishlist(final User user) {
         return WISHLISTS.get(user.getUserId());

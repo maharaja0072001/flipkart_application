@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * <p>
- *     Represents a wishlist for the user to add the items to the wishlist and can move them to cart for ordering.
+ * Represents a wishlist for the user to add the items to the wishlist and can move them to cart for ordering.
  * </p>
  *
  * @author Maharaja S
@@ -22,10 +22,10 @@ public class Wishlist {
 
     /**
      * <p>
-     *     Constructor of Wishlist class.
+     * Constructor of Wishlist class.
      * </p>
      *
-     * @param user refers the user who owns the Wishlist.
+     * @param user refers the {@link User} who owns the Wishlist.
      */
     public Wishlist(final User user) {
         this.user = user;
@@ -33,17 +33,39 @@ public class Wishlist {
         user.setWishlistId(id);
     }
 
-    public boolean addItemToWishlist(final Product item) {
+    /**
+     * <p>
+     * Adds the specific product to the wishlist
+     * </p>
+     *
+     * @param product Refers {@link Product} to be added to the wishlist.
+     * @return true if the product is added.
+     */
+    public boolean addItemToWishlist(final Product product) {
         if (null == wishlistItems) {
             wishlistItems =  new LinkedList<>();
         }
-        return wishlistItems.add(item);
+        return wishlistItems.add(product);
     }
 
-    public void removeItemFromWishlist(final Product item) {
-        wishlistItems.remove(item);
+    /**
+     * <p>
+     * Removes the specific product from the wishlist
+     * </p>
+     *
+     * @param product Refers {@link Product} the product to be removed.
+     */
+    public void removeItemFromWishlist(final Product product) {
+        wishlistItems.remove(product);
     }
 
+    /**
+     * <p>
+     * Gets the products in the wishlist and returns it.
+     * </p>
+     *
+     * @return all the {@link Product} in the wishlist.
+     */
     public List<Product> getWishlistItems() {
         return wishlistItems;
     }

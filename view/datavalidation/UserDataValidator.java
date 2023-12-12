@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 /**
  * <p>
- * Validates the input given by the users
+ * Responsible for validating the input given by the users
  * </p>
  *
  * @author Maharaja S
@@ -17,8 +17,7 @@ public class UserDataValidator {
 
     /**
      * <p>
-     *     Default constructor of UserDataValidator class. Kept private to restrict from
-     *     creating object outside this class.
+     * Default constructor of UserDataValidator class. Kept private to restrict from creating object outside this class.
      * </p>
      */
     private UserDataValidator() {}
@@ -43,7 +42,7 @@ public class UserDataValidator {
      * Validates the name by the given regular expression pattern.
      * </p>
      *
-     * @param name the name entered by the user to ba validated.
+     * @param name Refers the name entered by the user to ba validated.
      * @return true if the entered name is valid or false otherwise.
      */
     public boolean isValidName(final String name) {
@@ -55,7 +54,7 @@ public class UserDataValidator {
      * Validates the password by the given regular expression pattern.
      * </p>
      *
-     * @param password password entered by the user to be validated.
+     * @param password Refers the password entered by the user to be validated.
      * @return true if the entered password is valid or false otherwise.
      */
     public boolean isValidPassword(final String password) {
@@ -67,7 +66,7 @@ public class UserDataValidator {
      * Validates the email id by the given regular expression pattern.
      * </p>
      *
-     * @param emailId email id entered by the user to be validated.
+     * @param emailId Refers the email id entered by the user to be validated.
      * @return true if the entered email id is valid or false otherwise.
      */
     public boolean isValidEmail(final String emailId) {
@@ -79,7 +78,7 @@ public class UserDataValidator {
      * Validates the mobile number by the given regular expression pattern.
      * </p>
      *
-     * @param mobileNumber mobile number entered by the user to be validated.
+     * @param mobileNumber Refers the mobile number entered by the user to be validated.
      * @param choice the choice of the user for country code.
      * @return true if the entered mobile number is valid or false otherwise.
      */
@@ -111,7 +110,7 @@ public class UserDataValidator {
      * Validates the choice entered by the user by the given regular expression pattern.
      * </p>
      *
-     * @param choice choice entered by the user to be validated.
+     * @param choice Refers the choice entered by the user to be validated.
      * @return true if the entered choice is valid or false otherwise.
      */
     public boolean isChoiceValid(final String choice) {
@@ -123,7 +122,7 @@ public class UserDataValidator {
      * Checks whether the given object is null or not
      * </p>
      *
-     * @param object object to be checked for null.
+     * @param object Refers the object to be checked for null.
      * @return true if the object is null or false otherwise.
      */
     public boolean isNull(Object object) {
@@ -135,15 +134,15 @@ public class UserDataValidator {
      * Checks whether the given input contains a character for navigating back.
      * </p>
      *
-     * @param input input to be checked for the presence of the character.
+     * @param input Refers the input to be checked for the presence of the character.
      * @return true if the input contains the character for navigating back or false otherwise.
      */
     public boolean containsToNavigateBack(final String input) {
-        return input.equals("$");
+        return "$".equals(input);
     }
 
     public boolean containsToFilterMenu(final String input) {
-        return input.equals("#");
+        return "#".equals(input);
     }
 
     /**
@@ -151,10 +150,10 @@ public class UserDataValidator {
      * validates the input given by the user for the access.
      * </p>
      *
-     * @param input input to be validated.
+     * @param input Refers the input to be validated.
      * @return true if the input is valid for access or false otherwise.
      */
     public boolean validateAccess(final String input) {
-        return input.equals("1");
+        return "1".equals(input);
     }
 }

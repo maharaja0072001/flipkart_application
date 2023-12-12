@@ -6,7 +6,7 @@ import com.flipkart.model.product.Product;
 
 /**
  * <p>
- * Provides service for the Wishlist.
+ * Provides the service for the Wishlist.
  * </p>
  *
  * @author Maharaja S
@@ -19,25 +19,29 @@ public interface WishlistService {
      * Adds the specific product to the wishlist
      * </p>
      *
-     * @param product Refers {@link Product} the product to be added.
+     * @param user Refers the current {@link User}
+     * @param product Refers {@link Product} to be added to the wishlist.
+     * @return true if the product is added.
      */
     boolean addToWishlist(final Product product, final User user);
 
     /**
      * <p>
-     * Removes the specific product to the wishlist
+     * Removes the specific product from the wishlist
      * </p>
      *
+     * @param user Refers the current {@link User}
      * @param product Refers {@link Product} the product to be removed.
      */
     void removeFromWishlist(final Product product, final User user);
 
     /**
      * <p>
-     * Gets all the items in the wishlist of a user.
+     * Gets the wishlist of the current user and returns it.
      * </p>
      *
-     * @return the items in the wishlist.
+     * @param user Refers the current {@link User}
+     * @return the {@link Wishlist} of the user.
      */
     Wishlist getUserWishlist(final User user);
 }

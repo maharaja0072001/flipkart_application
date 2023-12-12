@@ -27,8 +27,7 @@ public class CartView {
 
     /**
      * <p>
-     *     Default constructor of CartView class. Kept private to restrict from
-     *     creating object outside this class.
+     * Default constructor of CartView class. Kept private to restrict from creating object outside this class.
      * </p>
      */
     private CartView() {}
@@ -53,9 +52,10 @@ public class CartView {
      * Adds the specific product to the cart.
      * </p>
      *
+     * @param user Refers the current {@link User}
+     * @param product Refers the {@link Product} to be added to the cart
      * @return true if the product is added to the cart and false otherwise
      */
-
     public boolean addToCart(final Product product, final User user) {
         return CART_CONTROLLER.addToCart(product, user);
     }
@@ -64,6 +64,8 @@ public class CartView {
      * <p>
      * Shows the items presented in the cart and user can place the order of the items present in the cart.
      * </p>
+     *
+     * @param user Refers the current {@link User}
      */
     public void viewCart(final User user) {
         final Cart cart = CART_CONTROLLER.getUserCart(user);

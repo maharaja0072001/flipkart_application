@@ -2,7 +2,7 @@ package com.flipkart;
 
 /**
  * <p>
- * Provides category of products available.
+ * Responsible for providing category of products available.
  * </p>
  *
  * @author Maharaja S

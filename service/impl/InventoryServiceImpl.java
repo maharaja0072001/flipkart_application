@@ -23,11 +23,9 @@ public class InventoryServiceImpl implements InventoryService {
     private static final List<Product> CLOTHES_INVENTORY = new ArrayList<>();
     private static InventoryServiceImpl inventoryInstance;
 
-
     /**
      * <p>
-     *     Default constructor of InventoryServiceImpl class. Kept private to restrict from
-     *     creating object outside this class.
+     * Default constructor of InventoryServiceImpl class. Kept private to restrict from creating object outside this class.
      * </p>
      */
     private InventoryServiceImpl() {}
@@ -52,7 +50,7 @@ public class InventoryServiceImpl implements InventoryService {
      * Adds the given products to the inventory.
      * </p>
      *
-     * @param products the products to be added.
+     * @param products Refers the {@link Product} to be added.
      */
     @Override
     public void addItemToInventory(final List<Product> products) {
@@ -76,7 +74,7 @@ public class InventoryServiceImpl implements InventoryService {
      * Removes the given item from the inventory.
      * </p>
      *
-     * @param product the item to be removed.
+     * @param product Refers the {@link Product} to be removed.
      */
     @Override
     public void removeItemFromInventory(final Product product) {
@@ -95,10 +93,10 @@ public class InventoryServiceImpl implements InventoryService {
 
     /**
      * <p>
-     * Gets all the items from the mobile inventory and returns it.
+     * Gets all the products from the mobile inventory and returns it.
      * </p>
      *
-     * @return the items in the mobile inventory.
+     * @return all the {@link Product} in the mobile inventory.
      */
     @Override
     public List<Product> getMobileItems() {
@@ -107,10 +105,10 @@ public class InventoryServiceImpl implements InventoryService {
 
     /**
      * <p>
-     * Gets all the items from the laptop inventory and returns it
+     * Gets all the products from the laptop inventory and returns it
      * </p>
      *
-     * @return the items in the laptop inventory.
+     * @return all the {@link Product} in the laptop inventory.
      */
     @Override
     public List<Product> getLaptopItems() {
@@ -119,10 +117,10 @@ public class InventoryServiceImpl implements InventoryService {
 
     /**
      * <p>
-     * Gets all the items from the clothes inventory and returns it.
+     * Gets all the products from the clothes inventory and returns it.
      * </p>
      *
-     * @return the items in the clothes inventory.
+     * @return all the {@link Product} in the clothes inventory.
      */
     @Override
     public List<Product> getClothesItems() {

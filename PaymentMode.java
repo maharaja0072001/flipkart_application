@@ -2,7 +2,7 @@ package com.flipkart;
 
 /**
  * <p>
- * Provides the payment modes.
+ * Responsible for providing the payment modes.
  * </p>
  *
  * @author Maharaja S

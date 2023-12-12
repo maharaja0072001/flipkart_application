@@ -54,8 +54,8 @@ public class FilterMenuView {
      * Shows the filter menu to the user to filter the items presented in the inventory.
      * </p>
      *
-     * @param user Refers the current logged-in user.
-     * @param inventoryItems Refers the products in the inventory.
+     * @param user Refers the current {@link User}.
+     * @param inventoryItems Refers all the {@link Product} in the inventory.
      */
     public void showFilterMenu(final User user, final List<Product> inventoryItems) {
         boolean exit = false;
@@ -120,12 +120,13 @@ public class FilterMenuView {
 
     /**
      * <p>
-     * Gets the choice from the user to add the item to the cart or wishlist.
+     * Gets the choice from the user to add the product to the cart or wishlist.
      * </p>
-     * @param item Refers the item to add to cart or wishlist
-     * @param user Refers the current logged_in user.
+     *
+     * @param product Refers the {@link Product} to be added to cart or wishlist
+     * @param user Refers the current {@link User}.
      */
-    public void addItemToCartOrWishlist(final Product item, final User user) {
+    public void addItemToCartOrWishlist(final Product product, final User user) {
         int choice;
 
         System.out.println("Enter '1' to add to cart or '2' to add to wishlist. Press any key to go back");
@@ -137,14 +138,14 @@ public class FilterMenuView {
 
         switch (choice) {
             case 1:
-                if (CART_VIEW.addToCart(item, user)) {
+                if (CART_VIEW.addToCart(product, user)) {
                     System.out.println("Item added to cart");
                 } else {
                     System.out.println("Item not added");
                 };
                 break;
             case 2:
-                if (WISHLIST_VIEW.addToWishlist(item, user)) {
+                if (WISHLIST_VIEW.addToWishlist(product, user)) {
                     System.out.println("Item added to wishlist");
                 } else {
                     System.out.println("Item not added");
@@ -158,17 +159,16 @@ public class FilterMenuView {
     /**
      * <p>
      * Gets the specific item from the inventory which was selected by the user and return it.
-     *
      * </p>
      *
-     *  @return the item selected by the user.
-     * @param items Refers the products in the inventory.
+     * @return the {@link Product} selected by the user.
+     * @param products Refers all the {@link Product} in the inventory.
      */
-    public Product getSelectedItem(final List<Product> items) {
+    public Product getSelectedItem(final List<Product> products) {
         int index;
         final Scanner scanner = InputHandler.getScanner();
 
-        if (null == items || items.isEmpty()) {
+        if (null == products || products.isEmpty()) {
             return null;
         }
 
@@ -182,7 +182,7 @@ public class FilterMenuView {
                 } else {
                     index = Integer.parseInt(input);
 
-                    if (index > items.size() || index <= 0) {
+                    if (index > products.size() || index <= 0) {
                         System.out.println("Enter a valid product id");
                         continue;
                     }
@@ -193,19 +193,19 @@ public class FilterMenuView {
             }
         }
 
-        return items.get(--index);
+        return products.get(--index);
     }
 
     /**
      * <p>
-     * Shows the list of items to the user.
+     * Shows the list of products to the user.
      * </p>
      *
-     * @param items Refers the products in the inventory.
+     * @param products Refers all the {@link Product} in the inventory.
      */
-    public void showItems(final List<Product> items) {
-        for (int i = 0; i < items.size(); i++) {
-            System.out.println(String.format("[%d : %s]", i+1, items.get(i)));
+    public void showItems(final List<Product> products) {
+        for (int i = 0; i < products.size(); i++) {
+            System.out.println(String.format("[%d : %s]", i+1, products.get(i)));
         }
     }
 }

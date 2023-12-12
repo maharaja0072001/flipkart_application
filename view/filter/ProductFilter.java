@@ -16,7 +16,7 @@ public interface ProductFilter {
 
     /**
      * <p>
-     *    filters the inventory based on implementation and returns the filtered items.
+     * Filters the products in the inventory and returns the filtered items.
      * </p>
      *
      * @return the filtered items.

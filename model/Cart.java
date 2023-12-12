@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * <p>
- *     Represents a cart for the user to add the items to the cart and placing the orders.
+ * Represents a cart for the user to add the items to the cart and placing the orders.
  * </p>
  *
  * @author Maharaja S
@@ -20,10 +20,9 @@ public class Cart {
     private int id;
     private User user;
 
-
     /**
      * <p>
-     *     Constructor of the Cart class.
+     * Constructor of the Cart class.
      * </p>
      *
      * @param user refers the user who owns the cart.
@@ -57,10 +56,6 @@ public class Cart {
 
     public void setId(final int id) {
         this.id = id;
-    }
-
-    public void setCartItems(final List<Product> cartItems) {
-        this.cartItems = cartItems;
     }
 
 }
